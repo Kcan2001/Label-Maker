@@ -50,7 +50,7 @@ const AddressForm = (props) => {
         </ItemSpacer>
         <FormInput width="38%" label="Zip" dataType={zip} value={formState[zip] ? formState[zip] : ""} keyPressHandler={keyPressHandler}/>
     </TableDividersFlex>
-
+    
     <ButtonContainer onButtonHandle={onButtonHandle}/>
 
 </LabelContianer>
