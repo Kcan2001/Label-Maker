@@ -56,8 +56,8 @@ const ConfirmForm = (props) => {
         SHIPPING_OPTION
     } = globalState;
 
-    const ShippingOption = SHIPPING_OPTION === 1 ? "ground" : "priority";
-    const ShippingOptionCost = SHIPPING_OPTION === 1 ? 1 : 1.5;
+    const ShippingOption = parseInt(SHIPPING_OPTION) === 1 ? "ground" : "priority";
+    const ShippingOptionCost = parseInt(SHIPPING_OPTION) === 1 ? 1 : 1.5;
     const TotalShippingCost = parseInt(PACKAGE_WEIGHT) * 0.40 * ShippingOptionCost
 
     return (
