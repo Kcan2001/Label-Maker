@@ -1,6 +1,7 @@
 export const NEXT_STEP = 'NEXT_STEP';
 export const PREVIOUS_STEP = 'PREVIOUS_STEP';
-export const SAVE_STATE = 'SAVE_STATE';
+export const CONFIRM_LABEL = 'CONFIRM_LABEL';
+export const START_OVER = 'START_OVER';
 
 // Form Types
 export const SENDER_NAME = 'SENDER_NAME';

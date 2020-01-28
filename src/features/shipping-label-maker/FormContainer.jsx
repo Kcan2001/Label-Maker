@@ -1,8 +1,10 @@
-import React, {useState, useContext} from 'react'; 
+import React, {useState, useContext, useEffect} from 'react'; 
 import {SENDER_NAME, SENDER_STREET, SENDER_CITY, SENDER_STATE, SENDER_ZIP, RECIEVER_NAME, RECIEVER_STREET, 
-RECIEVER_CITY, RECIEVER_STATE, RECIEVER_ZIP, PACKAGE_WEIGHT, SHIPPING_OPTION, NEXT_STEP, PREVIOUS_STEP, WEIGHT, OPTIONS } from '../Actions';
+RECIEVER_CITY, RECIEVER_STATE, RECIEVER_ZIP, PACKAGE_WEIGHT, SHIPPING_OPTION, WEIGHT, OPTIONS } from '../Actions';
 import {DispatchContext, StateContext} from '../Context';
+import {LocalStateSaverReducer} from '../LocalStateSaverReducer';
 
+import ShippingLabel from './ShippingLabel';
 import AddressForm from './AddressForm';
 import ConfirmForm from './ConfirmForm';
 import OneOptionForm from './OneOptionForm';
@@ -46,14 +48,15 @@ const ShippingOptionKeyHandlers = (e, type) => {
 }
 
 const handleNextPreviousButtonClicks = (buttonType) => {
-    if (buttonType === NEXT_STEP) {
-        dispatch({type: NEXT_STEP, payload: formState});
-    } else if (buttonType === PREVIOUS_STEP){
-        dispatch({type: PREVIOUS_STEP, payload: formState})
-    }
-
-    setFormState(globalState);
+    dispatch({type: buttonType, payload: formState});
 }
+
+useEffect(() => {
+    const loadLocalState = LocalStateSaverReducer(globalState);
+    
+    setFormState(loadLocalState);
+}, [globalState]);
+
 
 if(step === 1) {
     return (
@@ -74,6 +77,10 @@ if(step === 1) {
 } else if (step === 5) {
     return (
         <ConfirmForm title="Please confirm your order: " onButtonHandle={handleNextPreviousButtonClicks}/>
+    )
+} else if (step === 6) {
+    return (
+        <ShippingLabel />
     )
 }
 }

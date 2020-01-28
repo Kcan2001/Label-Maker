@@ -29,6 +29,8 @@ const ProgressBar = () => {
     const state = useContext(StateContext);
     const {step} = state;
 
+    if(step === 6) {return null}
+
     return (
         <StyledBar value={getValue(step)} max="100"></StyledBar>
     )
